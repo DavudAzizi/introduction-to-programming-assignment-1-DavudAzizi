@@ -1,0 +1,37 @@
+import sqlite3
+
+DB = "favorites.db"
+
+def show(rows):
+    for row in rows:
+        print(" | ".join(str(x) for x in row))
+
+def main():
+    con = sqlite3.connect(DB)
+    cur = con.cursor()
+    while True:
+        print("\n=== SQL Explorer ===")
+        print("1. Count by language")
+        print("2. Count by problem")
+        print("3. Search by problem name")
+        print("4. Top 5 problems overall")
+        print("5. Quit")
+        choice = input("Choice: ").strip()
+
+        if choice == "1":
+            show(cur.execute("SELECT language, COUNT(*) FROM favorites GROUP BY language ORDER BY COUNT(*) DESC"))
+        elif choice == "2":
+            show(cur.execute("SELECT problem, COUNT(*) FROM favorites GROUP BY problem ORDER BY COUNT(*) DESC"))
+        elif choice == "3":
+            term = input("Problem search: ")
+            show(cur.execute("SELECT * FROM favorites WHERE problem LIKE ?", (f"%{term}%",)))
+        elif choice == "4":
+            show(cur.execute("SELECT problem, COUNT(*) FROM favorites GROUP BY problem ORDER BY COUNT(*) DESC LIMIT 5"))
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice.")
+    con.close()
+
+if __name__ == "__main__":
+    main()
