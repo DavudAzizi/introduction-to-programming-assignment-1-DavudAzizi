@@ -1,0 +1,19 @@
+def c_to_f(c): return c * 9 / 5 + 32
+def f_to_c(f): return (f - 32) * 5 / 9
+
+def main():
+    print("Temperature Converter")
+    choice = input("Convert (C)elsius to Fahrenheit or (F)ahrenheit to Celsius? ").strip().lower()
+    try:
+        value = float(input("Enter temperature: "))
+        if choice == "c":
+            print(f"{value:.2f}°C = {c_to_f(value):.2f}°F")
+        elif choice == "f":
+            print(f"{value:.2f}°F = {f_to_c(value):.2f}°C")
+        else:
+            print("Invalid choice.")
+    except ValueError:
+        print("Please enter a valid number.")
+
+if __name__ == "__main__":
+    main()
