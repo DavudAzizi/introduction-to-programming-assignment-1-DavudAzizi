@@ -1,0 +1,27 @@
+import csv
+from collections import Counter, defaultdict
+
+def read_csv(path):
+    with open(path, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+def main():
+    path = input("CSV file path: ").strip()
+    rows = read_csv(path)
+    print(f"Rows loaded: {len(rows)}")
+    if not rows:
+        return
+    print("Columns:", ", ".join(rows[0].keys()))
+
+    # Generic useful report: count non-empty values per column.
+    for column in rows[0]:
+        values = [row[column].strip() for row in rows if row.get(column, "").strip()]
+        print(f"{column}: {len(values)} non-empty values")
+
+    # Bonus: frequency report for the first column.
+    first = list(rows[0].keys())[0]
+    print(f"\nTop values in {first}:")
+    for value, count in Counter(row[first].strip() for row in rows if row.get(first, "").strip()).most_common(10):
+        print(f"{value}: {count}")
+
+if __name__ == "__main__":
