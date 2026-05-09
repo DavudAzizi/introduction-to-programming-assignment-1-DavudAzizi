@@ -1,0 +1,21 @@
+import csv
+from collections import defaultdict, Counter
+
+def main():
+    data = defaultdict(Counter)
+    with open("../week1/favorites.csv", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            language = (row.get("language") or row.get("Language") or "").strip()
+            problem = (row.get("problem") or row.get("Problem") or row.get("favorite_problem") or "").strip()
+            if language and problem:
+                data[language][problem] += 1
+
+    print("Language   | Most Common Problem")
+    print("-----------+--------------------")
+    for language in sorted(data):
+        problem, _ = data[language].most_common(1)[0]
+        print(f"{language:<10} | {problem}")
+
+if __name__ == "__main__":
+    main()
