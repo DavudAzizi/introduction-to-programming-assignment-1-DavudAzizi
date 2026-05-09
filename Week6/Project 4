@@ -1,0 +1,21 @@
+import string
+
+def count_words(text):
+    counts = {}
+    for word in text.lower().split():
+        word = word.strip(string.punctuation)
+        if word:
+            counts[word] = counts.get(word, 0) + 1
+    return counts
+
+def main():
+    text = input("Enter text: ")
+    counts = count_words(text)
+    print(f"Total words: {sum(counts.values())}")
+    print(f"Unique words: {len(counts)}")
+    print("Word frequencies:")
+    for word, count in sorted(counts.items(), key=lambda x: (-x[1], x[0])):
+        print(f"{word}: {count}")
+
+if __name__ == "__main__":
+    main()
