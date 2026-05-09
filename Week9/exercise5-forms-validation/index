@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 9 Complete Solution</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <h1>My Web App</h1>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tasks">Tasks</a></li>
+        <li><a href="#api">API</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="card">
+      <h2>About</h2>
+      <p>This page demonstrates semantic HTML, CSS, responsive design, DOM events, forms, fetch, and localStorage.</p>
+      <button id="themeBtn">Toggle Dark Mode</button>
+    </section>
+
+    <section id="tasks" class="card">
+      <h2>Local Storage Task List</h2>
+      <form id="taskForm">
+        <input id="taskInput" type="text" placeholder="New task" required />
+        <button>Add</button>
+      </form>
+      <ul id="taskList"></ul>
+    </section>
+
+    <section id="api" class="card">
+      <h2>Fetch API Demo</h2>
+      <button id="loadPost">Load Post</button>
+      <article id="post"></article>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Contact Form</h2>
+      <form id="contactForm" novalidate>
+        <label>Name <input id="name" type="text" required minlength="2"></label>
+        <label>Email <input id="email" type="email" required></label>
+        <label>Message <textarea id="message" required minlength="10"></textarea></label>
+        <button>Submit</button>
+      </form>
+      <p id="formMessage"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Week 9 Solution</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
