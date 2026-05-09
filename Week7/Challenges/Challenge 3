@@ -1,0 +1,23 @@
+import csv
+from collections import Counter
+
+def main():
+    counts = Counter()
+    with open("../week1/favorites.csv", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            language = row.get("language") or row.get("Language")
+            if language:
+                counts[language.strip()] += 1
+
+    total = sum(counts.values())
+    with open("language_summary.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["language", "votes", "percentage"])
+        for language, votes in sorted(counts.items(), key=lambda x: (-x[1], x[0])):
+            percentage = (votes / total * 100) if total else 0
+            writer.writerow([language, votes, f"{percentage:.2f}"])
+    print("Saved to language_summary.csv")
+
+if __name__ == "__main__":
+    main()
