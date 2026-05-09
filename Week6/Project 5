@@ -1,0 +1,43 @@
+def main():
+    cart = {}
+    print("Shopping Cart. Commands: add, remove, view, total, quit")
+    while True:
+        cmd = input("Command: ").strip().lower()
+        if cmd == "add":
+            name = input("Item name: ").strip()
+            try:
+                price = float(input("Price: "))
+                qty = int(input("Quantity: "))
+                if price < 0 or qty <= 0:
+                    print("Invalid price or quantity.")
+                    continue
+                if name in cart:
+                    cart[name]["qty"] += qty
+                else:
+                    cart[name] = {"price": price, "qty": qty}
+                print("Added.")
+            except ValueError:
+                print("Invalid number.")
+        elif cmd == "remove":
+            name = input("Item name: ").strip()
+            if name in cart:
+                del cart[name]
+                print("Removed.")
+            else:
+                print("Item not found.")
+        elif cmd == "view":
+            if not cart:
+                print("Cart is empty.")
+            for name, item in cart.items():
+                subtotal = item["price"] * item["qty"]
+                print(f"{name}: {item['qty']} x ${item['price']:.2f} = ${subtotal:.2f}")
+        elif cmd == "total":
+            total = sum(i["price"] * i["qty"] for i in cart.values())
+            print(f"Total: ${total:.2f}")
+        elif cmd == "quit":
+            break
+        else:
+            print("Unknown command.")
+
+if __name__ == "__main__":
+    main()
