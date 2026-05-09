@@ -1,0 +1,35 @@
+def letter_grade(avg):
+    if avg >= 90: return "A"
+    if avg >= 80: return "B"
+    if avg >= 70: return "C"
+    if avg >= 60: return "D"
+    return "F"
+
+def main():
+    grades = []
+    print("Grade Calculator. Type done when finished.")
+    while True:
+        value = input("Grade: ").strip()
+        if value.lower() == "done":
+            break
+        try:
+            grade = float(value)
+            if 0 <= grade <= 100:
+                grades.append(grade)
+            else:
+                print("Grade must be 0-100.")
+        except ValueError:
+            print("Enter a number or done.")
+
+    if not grades:
+        print("No grades entered.")
+        return
+
+    avg = sum(grades) / len(grades)
+    print(f"Average: {avg:.2f}")
+    print(f"Highest: {max(grades):.2f}")
+    print(f"Lowest: {min(grades):.2f}")
+    print(f"Letter grade: {letter_grade(avg)}")
+
+if __name__ == "__main__":
+    main()
