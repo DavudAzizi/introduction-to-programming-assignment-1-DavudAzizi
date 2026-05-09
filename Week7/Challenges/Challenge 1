@@ -1,0 +1,18 @@
+import csv
+from collections import Counter
+
+def main():
+    minimum = int(input("Minimum votes to display: "))
+    counts = Counter()
+    with open("../week1/favorites.csv", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            language = row.get("language") or row.get("Language")
+            if language:
+                counts[language.strip()] += 1
+    for language, votes in sorted(counts.items(), key=lambda x: (-x[1], x[0])):
+        if votes >= minimum:
+            print(f"{language}: {votes}")
+
+if __name__ == "__main__":
+    main()
